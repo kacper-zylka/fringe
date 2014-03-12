@@ -1,0 +1,10 @@
+mixin content()
+  h1=attributes.title
+
+html
+  head
+    link(rel='stylesheet', href='/styles')
+    script(type='text/javascript', src='http://code.jquery.com/jquery-2.1.0.min.js')
+    script(src='/js/client.js')
+  body
+    +content(title='Fringe')

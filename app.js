@@ -30,10 +30,17 @@ function initDb() {
 
 app = express();
 app.use(express.logger('dev'));
+app.use(express.static(__dirname + '/public'));
 
 app.get('/page', function(req,res) {
   var src = fs.readFileSync('./page.jade', 'utf8')
   res.send(jade.compile(src)());
+});
+
+app.get('/styles', function(req,res) {
+  res.setHeader('ContentType', 'test/stylesheets');
+  var src = fs.readFileSync('./styles.styl', 'utf8')
+  res.send(stylus.render(src));
 });
 
 function genTapper(cname) {
@@ -112,6 +119,7 @@ app.delete('/reset', function(req, res) {
     });
   });
 });
+
 
 PORT = 3000;
 app.listen(PORT, function(err) {
